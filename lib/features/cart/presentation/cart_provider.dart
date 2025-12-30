@@ -1,6 +1,45 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kick_store_app/core/usecases/usecase.dart';
+import 'package:kick_store_app/features/cart/data/datasources/cart_local_data_source.dart';
+import 'package:kick_store_app/features/cart/data/repositories/cart_repository_impl.dart';
 import 'package:kick_store_app/features/cart/domain/cart_item.dart';
+import 'package:kick_store_app/features/cart/domain/repositories/cart_repository.dart';
+import 'package:kick_store_app/features/cart/domain/usecases/add_to_cart.dart';
+import 'package:kick_store_app/features/cart/domain/usecases/clear_cart.dart';
+import 'package:kick_store_app/features/cart/domain/usecases/get_cart_items.dart';
+import 'package:kick_store_app/features/cart/domain/usecases/remove_from_cart.dart';
+import 'package:kick_store_app/features/cart/domain/usecases/update_cart_quantity.dart';
 import 'package:kick_store_app/features/products/domain/entities/sneaker.dart';
+
+final cartLocalDataSourceProvider = Provider<CartLocalDataSource>((ref) {
+  return CartLocalDataSourceImpl();
+});
+
+final cartRepositoryProvider = Provider<CartRepository>((ref) {
+  final localDataSource = ref.watch(cartLocalDataSourceProvider);
+  return CartRepositoryImpl(localDataSource);
+});
+
+// UseCase Providers
+final getCartItemsProvider = Provider<GetCartItems>((ref) {
+  return GetCartItems(ref.watch(cartRepositoryProvider));
+});
+
+final addToCartProvider = Provider<AddToCart>((ref) {
+  return AddToCart(ref.watch(cartRepositoryProvider));
+});
+
+final removeFromCartProvider = Provider<RemoveFromCart>((ref) {
+  return RemoveFromCart(ref.watch(cartRepositoryProvider));
+});
+
+final updateCartQuantityProvider = Provider<UpdateCartQuantity>((ref) {
+  return UpdateCartQuantity(ref.watch(cartRepositoryProvider));
+});
+
+final clearCartProvider = Provider<ClearCart>((ref) {
+  return ClearCart(ref.watch(cartRepositoryProvider));
+});
 
 class CartState {
   final List<CartItem> items;
@@ -17,58 +56,56 @@ class CartState {
 }
 
 class CartNotifier extends StateNotifier<CartState> {
-  CartNotifier() : super(CartState(items: []));
+  final GetCartItems getCartItems;
+  final AddToCart addToCart;
+  final RemoveFromCart removeFromCart;
+  final UpdateCartQuantity updateCartQuantity;
+  final ClearCart clearCartUseCase;
 
-  void addItem(SneakerEntity sneaker, int size) {
-    final existingIndex = state.items.indexWhere(
-      (item) => item.sneaker.id == sneaker.id && item.selectedSize == size,
+  CartNotifier({
+    required this.getCartItems,
+    required this.addToCart,
+    required this.removeFromCart,
+    required this.updateCartQuantity,
+    required this.clearCartUseCase,
+  }) : super(CartState(items: [])) {
+    _loadCart();
+  }
+
+  Future<void> _loadCart() async {
+    final items = await getCartItems(const NoParams());
+    state = state.copyWith(items: items);
+  }
+
+  Future<void> addItem(SneakerEntity sneaker, int size) async {
+    await addToCart(AddToCartParams(sneaker: sneaker, size: size));
+    await _loadCart();
+  }
+
+  Future<void> removeItem(String id, int size) async {
+    await removeFromCart(RemoveFromCartParams(sneakerId: id, size: size));
+    await _loadCart();
+  }
+
+  Future<void> updateQuantity(String id, int size, int quantity) async {
+    await updateCartQuantity(
+      UpdateCartQuantityParams(sneakerId: id, size: size, quantity: quantity),
     );
-
-    if (existingIndex != -1) {
-      final updatedItems = List<CartItem>.from(state.items);
-      updatedItems[existingIndex] = updatedItems[existingIndex].copyWith(
-        quantity: updatedItems[existingIndex].quantity + 1,
-      );
-      state = state.copyWith(items: updatedItems);
-    } else {
-      state = state.copyWith(
-        items: [
-          ...state.items,
-          CartItem(sneaker: sneaker, quantity: 1, selectedSize: size),
-        ],
-      );
-    }
+    await _loadCart();
   }
 
-  void removeItem(String id, int size) {
-    state = state.copyWith(
-      items: state.items
-          .where(
-            (item) => !(item.sneaker.id == id && item.selectedSize == size),
-          )
-          .toList(),
-    );
-  }
-
-  void updateQuantity(String id, int size, int quantity) {
-    if (quantity <= 0) {
-      removeItem(id, size);
-      return;
-    }
-    final updatedItems = state.items.map((item) {
-      if (item.sneaker.id == id && item.selectedSize == size) {
-        return item.copyWith(quantity: quantity);
-      }
-      return item;
-    }).toList();
-    state = state.copyWith(items: updatedItems);
-  }
-
-  void clearCart() {
-    state = state.copyWith(items: []);
+  Future<void> clearCart() async {
+    await clearCartUseCase(const NoParams());
+    await _loadCart();
   }
 }
 
 final cartProvider = StateNotifierProvider<CartNotifier, CartState>((ref) {
-  return CartNotifier();
+  return CartNotifier(
+    getCartItems: ref.watch(getCartItemsProvider),
+    addToCart: ref.watch(addToCartProvider),
+    removeFromCart: ref.watch(removeFromCartProvider),
+    updateCartQuantity: ref.watch(updateCartQuantityProvider),
+    clearCartUseCase: ref.watch(clearCartProvider),
+  );
 });

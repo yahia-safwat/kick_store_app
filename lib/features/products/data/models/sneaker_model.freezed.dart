@@ -12,8 +12,7 @@ part of 'sneaker_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SneakerModel _$SneakerModelFromJson(Map<String, dynamic> json) {
   return _SneakerModel.fromJson(json);
@@ -30,12 +29,8 @@ mixin _$SneakerModel {
   List<int> get sizes => throw _privateConstructorUsedError;
   bool get isFavorite => throw _privateConstructorUsedError;
 
-  /// Serializes this SneakerModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of SneakerModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $SneakerModelCopyWith<SneakerModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,20 +38,18 @@ mixin _$SneakerModel {
 /// @nodoc
 abstract class $SneakerModelCopyWith<$Res> {
   factory $SneakerModelCopyWith(
-    SneakerModel value,
-    $Res Function(SneakerModel) then,
-  ) = _$SneakerModelCopyWithImpl<$Res, SneakerModel>;
+          SneakerModel value, $Res Function(SneakerModel) then) =
+      _$SneakerModelCopyWithImpl<$Res, SneakerModel>;
   @useResult
-  $Res call({
-    String id,
-    String name,
-    String brand,
-    String description,
-    double price,
-    String imageUrl,
-    List<int> sizes,
-    bool isFavorite,
-  });
+  $Res call(
+      {String id,
+      String name,
+      String brand,
+      String description,
+      double price,
+      String imageUrl,
+      List<int> sizes,
+      bool isFavorite});
 }
 
 /// @nodoc
@@ -69,8 +62,6 @@ class _$SneakerModelCopyWithImpl<$Res, $Val extends SneakerModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SneakerModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -83,43 +74,40 @@ class _$SneakerModelCopyWithImpl<$Res, $Val extends SneakerModel>
     Object? sizes = null,
     Object? isFavorite = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id: null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                      as String,
-            name: null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                      as String,
-            brand: null == brand
-                ? _value.brand
-                : brand // ignore: cast_nullable_to_non_nullable
-                      as String,
-            description: null == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                      as String,
-            price: null == price
-                ? _value.price
-                : price // ignore: cast_nullable_to_non_nullable
-                      as double,
-            imageUrl: null == imageUrl
-                ? _value.imageUrl
-                : imageUrl // ignore: cast_nullable_to_non_nullable
-                      as String,
-            sizes: null == sizes
-                ? _value.sizes
-                : sizes // ignore: cast_nullable_to_non_nullable
-                      as List<int>,
-            isFavorite: null == isFavorite
-                ? _value.isFavorite
-                : isFavorite // ignore: cast_nullable_to_non_nullable
-                      as bool,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      brand: null == brand
+          ? _value.brand
+          : brand // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
+      imageUrl: null == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      sizes: null == sizes
+          ? _value.sizes
+          : sizes // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
   }
 }
 
@@ -127,21 +115,19 @@ class _$SneakerModelCopyWithImpl<$Res, $Val extends SneakerModel>
 abstract class _$$SneakerModelImplCopyWith<$Res>
     implements $SneakerModelCopyWith<$Res> {
   factory _$$SneakerModelImplCopyWith(
-    _$SneakerModelImpl value,
-    $Res Function(_$SneakerModelImpl) then,
-  ) = __$$SneakerModelImplCopyWithImpl<$Res>;
+          _$SneakerModelImpl value, $Res Function(_$SneakerModelImpl) then) =
+      __$$SneakerModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String name,
-    String brand,
-    String description,
-    double price,
-    String imageUrl,
-    List<int> sizes,
-    bool isFavorite,
-  });
+  $Res call(
+      {String id,
+      String name,
+      String brand,
+      String description,
+      double price,
+      String imageUrl,
+      List<int> sizes,
+      bool isFavorite});
 }
 
 /// @nodoc
@@ -149,12 +135,9 @@ class __$$SneakerModelImplCopyWithImpl<$Res>
     extends _$SneakerModelCopyWithImpl<$Res, _$SneakerModelImpl>
     implements _$$SneakerModelImplCopyWith<$Res> {
   __$$SneakerModelImplCopyWithImpl(
-    _$SneakerModelImpl _value,
-    $Res Function(_$SneakerModelImpl) _then,
-  ) : super(_value, _then);
+      _$SneakerModelImpl _value, $Res Function(_$SneakerModelImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of SneakerModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -167,59 +150,57 @@ class __$$SneakerModelImplCopyWithImpl<$Res>
     Object? sizes = null,
     Object? isFavorite = null,
   }) {
-    return _then(
-      _$SneakerModelImpl(
-        id: null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
-                  as String,
-        name: null == name
-            ? _value.name
-            : name // ignore: cast_nullable_to_non_nullable
-                  as String,
-        brand: null == brand
-            ? _value.brand
-            : brand // ignore: cast_nullable_to_non_nullable
-                  as String,
-        description: null == description
-            ? _value.description
-            : description // ignore: cast_nullable_to_non_nullable
-                  as String,
-        price: null == price
-            ? _value.price
-            : price // ignore: cast_nullable_to_non_nullable
-                  as double,
-        imageUrl: null == imageUrl
-            ? _value.imageUrl
-            : imageUrl // ignore: cast_nullable_to_non_nullable
-                  as String,
-        sizes: null == sizes
-            ? _value._sizes
-            : sizes // ignore: cast_nullable_to_non_nullable
-                  as List<int>,
-        isFavorite: null == isFavorite
-            ? _value.isFavorite
-            : isFavorite // ignore: cast_nullable_to_non_nullable
-                  as bool,
-      ),
-    );
+    return _then(_$SneakerModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      brand: null == brand
+          ? _value.brand
+          : brand // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
+      imageUrl: null == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      sizes: null == sizes
+          ? _value._sizes
+          : sizes // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$SneakerModelImpl extends _SneakerModel {
-  const _$SneakerModelImpl({
-    required this.id,
-    required this.name,
-    required this.brand,
-    required this.description,
-    required this.price,
-    required this.imageUrl,
-    required final List<int> sizes,
-    this.isFavorite = false,
-  }) : _sizes = sizes,
-       super._();
+  const _$SneakerModelImpl(
+      {required this.id,
+      required this.name,
+      required this.brand,
+      required this.description,
+      required this.price,
+      required this.imageUrl,
+      required final List<int> sizes,
+      this.isFavorite = false})
+      : _sizes = sizes,
+        super._();
 
   factory _$SneakerModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SneakerModelImplFromJson(json);
@@ -271,23 +252,12 @@ class _$SneakerModelImpl extends _SneakerModel {
                 other.isFavorite == isFavorite));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    name,
-    brand,
-    description,
-    price,
-    imageUrl,
-    const DeepCollectionEquality().hash(_sizes),
-    isFavorite,
-  );
+  int get hashCode => Object.hash(runtimeType, id, name, brand, description,
+      price, imageUrl, const DeepCollectionEquality().hash(_sizes), isFavorite);
 
-  /// Create a copy of SneakerModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SneakerModelImplCopyWith<_$SneakerModelImpl> get copyWith =>
@@ -295,21 +265,22 @@ class _$SneakerModelImpl extends _SneakerModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SneakerModelImplToJson(this);
+    return _$$SneakerModelImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _SneakerModel extends SneakerModel {
-  const factory _SneakerModel({
-    required final String id,
-    required final String name,
-    required final String brand,
-    required final String description,
-    required final double price,
-    required final String imageUrl,
-    required final List<int> sizes,
-    final bool isFavorite,
-  }) = _$SneakerModelImpl;
+  const factory _SneakerModel(
+      {required final String id,
+      required final String name,
+      required final String brand,
+      required final String description,
+      required final double price,
+      required final String imageUrl,
+      required final List<int> sizes,
+      final bool isFavorite}) = _$SneakerModelImpl;
   const _SneakerModel._() : super._();
 
   factory _SneakerModel.fromJson(Map<String, dynamic> json) =
@@ -331,11 +302,8 @@ abstract class _SneakerModel extends SneakerModel {
   List<int> get sizes;
   @override
   bool get isFavorite;
-
-  /// Create a copy of SneakerModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SneakerModelImplCopyWith<_$SneakerModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
