@@ -14,19 +14,7 @@ class ProductListingPage extends ConsumerWidget {
     final productsAsync = ref.watch(productsProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('KICK STORE'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.favorite_border),
-            onPressed: () => context.push('/favorites'),
-          ),
-          IconButton(
-            icon: const Icon(Icons.shopping_cart_outlined),
-            onPressed: () => context.push('/cart'),
-          ),
-        ],
-      ),
+      appBar: AppBar(title: const Text('KICK STORE')),
       body: AsyncValueWidget(
         value: productsAsync,
         data: (products) {

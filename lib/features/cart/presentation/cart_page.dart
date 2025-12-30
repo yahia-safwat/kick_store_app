@@ -190,7 +190,7 @@ class CartPage extends ConsumerWidget {
                       ),
                       const SizedBox(height: 16),
                       ElevatedButton(
-                        onPressed: () => context.push('/order-summary'),
+                        onPressed: () => context.push('/cart/summary'),
                         child: const Text('CHECKOUT'),
                       ),
                     ],
