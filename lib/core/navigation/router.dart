@@ -7,6 +7,7 @@ import 'package:kick_store_app/features/cart/presentation/cart_page.dart';
 import 'package:kick_store_app/features/favorites/presentation/favorites_page.dart';
 import 'package:kick_store_app/features/orders/presentation/order_summary_page.dart';
 import 'package:kick_store_app/features/orders/presentation/order_history_page.dart';
+import 'package:kick_store_app/features/account/presentation/pages/account_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(
   debugLabel: 'root',
@@ -15,10 +16,10 @@ final GlobalKey<NavigatorState> _shellNavigatorHomeKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellHome');
 final GlobalKey<NavigatorState> _shellNavigatorFavoritesKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellFavorites');
-final GlobalKey<NavigatorState> _shellNavigatorCartKey =
-    GlobalKey<NavigatorState>(debugLabel: 'shellCart');
 final GlobalKey<NavigatorState> _shellNavigatorOrdersKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellOrders');
+final GlobalKey<NavigatorState> _shellNavigatorAccountKey =
+    GlobalKey<NavigatorState>(debugLabel: 'shellAccount');
 
 final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
@@ -58,22 +59,6 @@ final router = GoRouter(
           ],
         ),
         StatefulShellBranch(
-          navigatorKey: _shellNavigatorCartKey,
-          routes: [
-            GoRoute(
-              path: '/cart',
-              builder: (context, state) => const CartPage(),
-              routes: [
-                GoRoute(
-                  path: 'summary',
-                  parentNavigatorKey: _rootNavigatorKey,
-                  builder: (context, state) => const OrderSummaryPage(),
-                ),
-              ],
-            ),
-          ],
-        ),
-        StatefulShellBranch(
           navigatorKey: _shellNavigatorOrdersKey,
           routes: [
             GoRoute(
@@ -81,6 +66,27 @@ final router = GoRouter(
               builder: (context, state) => const OrderHistoryPage(),
             ),
           ],
+        ),
+        StatefulShellBranch(
+          navigatorKey: _shellNavigatorAccountKey,
+          routes: [
+            GoRoute(
+              path: '/account',
+              builder: (context, state) => const AccountPage(),
+            ),
+          ],
+        ),
+      ],
+    ),
+    GoRoute(
+      path: '/cart',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => const CartPage(),
+      routes: [
+        GoRoute(
+          path: 'summary',
+          parentNavigatorKey: _rootNavigatorKey,
+          builder: (context, state) => const OrderSummaryPage(),
         ),
       ],
     ),
